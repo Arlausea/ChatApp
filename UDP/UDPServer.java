@@ -25,7 +25,7 @@ public class UDPServer {
     /** Default constructor of the UDP Server.  */
     public UDPServer(){
         this.port = defaulftPort; // Default port number
-        System.out.println("The server will be opened with the default port number 8080. Normal usage: ");
+        System.out.println("The server will be opened with the default port number 8080. Normal usage: arg 1: Listening Port.");
     }
 
 
