@@ -57,16 +57,6 @@ public class UDPClient {
                 InetAddress address = InetAddress.getByName(ServerHost);
                 DatagramPacket packet = new DatagramPacket(data, data.length, address, ServerPort);
                 socket.send(packet);
-
-
-                byte[] buffer = new byte[1024];
-                DatagramPacket receivedPacket = new DatagramPacket(buffer, buffer.length);
-                //socket.receive(receivedPacket);
-                String receivedMessage = new String(receivedPacket.getData(), 0, receivedPacket.getLength());
-                System.out.println("Message received: " + receivedMessage);
-
-
-
             }
 
 
