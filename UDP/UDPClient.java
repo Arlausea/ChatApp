@@ -61,7 +61,7 @@ public class UDPClient {
 
                 byte[] buffer = new byte[1024];
                 DatagramPacket receivedPacket = new DatagramPacket(buffer, buffer.length);
-                socket.receive(receivedPacket);
+                //socket.receive(receivedPacket);
                 String receivedMessage = new String(receivedPacket.getData(), 0, receivedPacket.getLength());
                 System.out.println("Message received: " + receivedMessage);
 
