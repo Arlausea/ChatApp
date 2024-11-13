@@ -10,22 +10,22 @@ public class UDPServer {
 
     private int port;
     private DatagramSocket socket;
-    private static int defaulftPort = 8080;
-    private static int max_size = 1500; // MTU default value for Ethernet packet
+    private static final int defaultPort = 8080;
+    private static final int max_size = 1500; // MTU default value for Ethernet packet
 
     // Constructor with one argument
     public UDPServer(String listening_port){
         this.port = Integer.parseInt(listening_port);
         if (port < 1024){
             System.out.println("Sudo needed, please use a port that is not reserved. We will put the default port 8080 instead.");
-            port = defaulftPort;
+            port = defaultPort;
         }
     }
 
     /** Default constructor of the UDP Server.  */
     public UDPServer(){
-        this.port = defaulftPort; // Default port number
-        System.out.println("The server will be opened with the default port number 8080. Normal usage: arg 1: Listening Port.");
+        this.port = defaultPort; // Default port number
+        System.out.println("The server will be opened with the default port number 8080. Normal usage: java Main [Listening Port].");
     }
 
 
