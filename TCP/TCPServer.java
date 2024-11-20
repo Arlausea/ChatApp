@@ -1,4 +1,4 @@
-package UDP;
+package TCP;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -24,41 +24,41 @@ public class TCPServer {
         }
     }
 
-    // Constructeur par défaut
+    // Default Constructor
     public TCPServer() {
         this.port = defaultPort;
-        System.out.println("Le serveur TCP va utiliser le port par défaut 8080.");
+        System.out.println("The TCP server started at the default port " + port);
     }
 
-    // Méthode pour lancer le serveur
+
     public void launch() {
         try {
             serverSocket = new ServerSocket(this.port);
-            System.out.println("Serveur TCP lancé sur le port : " + this.port);
+            System.out.println("TCP server launched at port " + this.port);
 
-            // Boucle d'attente pour les connexions client
+            // Waiting loop for connections
             Socket clientSocket = null;
             while (true) {
                 if (clientSocket == null) {
-                    System.out.println("En attente de connexion...");
+                    System.out.println("Waiting for a connection...");
                     clientSocket = serverSocket.accept();
                 }
                 System.out.println("Waiting for a message...");
-                System.out.println("Client connecté depuis : " + clientSocket.getInetAddress());
+                System.out.println("Client connected from: " + clientSocket.getInetAddress());
 
-                // Création des flux d'entrée et de sortie
+                // In and Out streams
                 BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                 PrintWriter out = new PrintWriter(new OutputStreamWriter(clientSocket.getOutputStream()), true);
 
-                // Lecture des données envoyées par le client
+                // Reading of data's client
                 String clientMessage = in.readLine();
-                System.out.println("Message reçu du client : " + clientMessage);
+                System.out.println("Received message from client: " + clientMessage);
 
-                // Réponse au client
+                // Answer
                 out.println("Echo : " + clientMessage);
 
 
-                // Fermeture de la connexion client
+                // Closing of the connection
                 if (clientMessage != null) {
                     if (clientMessage.equalsIgnoreCase("exit") | clientMessage.equals("null")) {
                         clientSocket.close();
