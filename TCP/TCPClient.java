@@ -1,4 +1,4 @@
-package TCP;
+package UDP;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,6 +15,7 @@ public class TCPClient {
     public TCPClient(String host, String port) {
         this.serverHost = host;
         this.serverPort = Integer.parseInt(port);
+
     }
 
     // Constructeur par défaut
@@ -40,17 +41,20 @@ public class TCPClient {
                 System.out.print("Message à envoyer : ");
                 message = consoleInput.readLine();
 
-                if ("exit".equalsIgnoreCase(message)) {
+                if ("exit".equalsIgnoreCase(message) | message == null ) {
+                    out.println(message);
                     System.out.println("Déconnexion...");
                     break;
                 }
+                if (!"".equalsIgnoreCase(message)) {
+                    // Envoi du message au serveur
+                    out.println(message);
 
-                // Envoi du message au serveur
-                out.println(message);
+                    // Lecture de la réponse du serveur
+                    String response = in.readLine();
+                    System.out.println("Réponse du serveur : " + response);
+                }
 
-                // Lecture de la réponse du serveur
-                String response = in.readLine();
-                System.out.println("Réponse du serveur : " + response);
             }
 
         } catch (IOException e) {
