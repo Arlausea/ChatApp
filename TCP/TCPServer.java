@@ -38,6 +38,7 @@ public class TCPServer {
 
             // Waiting loop for connections
             Socket clientSocket = null;
+
             while (true) {
                 if (clientSocket == null) {
                     System.out.println("Waiting for a connection...");
@@ -57,7 +58,6 @@ public class TCPServer {
                 // Answer
                 out.println("Echo : " + clientMessage);
 
-
                 // Closing of the connection
                 if (clientMessage != null) {
                     if (clientMessage.equalsIgnoreCase("exit") | clientMessage.equals("null")) {
@@ -66,16 +66,8 @@ public class TCPServer {
                         clientSocket = null;
                     }
                 }
-//                else{
-//                    clientSocket = null;
-//                    System.out.println("Client lost.");
-//                    }
-//                }
+
             }
-
-
-
-
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -85,12 +77,12 @@ public class TCPServer {
     @Override
     public String toString() {
         if (serverSocket == null) {
-            return "Serveur non initialisé.";
+            return "Socket is not created yet.";
         } else if (serverSocket.isBound()) {
-            return "Serveur TCP lié à un port.";
-        } else {
-            return "Serveur TCP fermé.";
+            return "Socket is bound to an address.";
         }
+        return "Socket closed.";
+
     }
 
     // Méthode main pour lancer le serveur

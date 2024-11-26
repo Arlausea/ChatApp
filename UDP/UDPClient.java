@@ -12,7 +12,6 @@ public class UDPClient {
     private final int ServerPort;
     private final String ServerHost;
 
-
     public UDPClient(String host, String port) {
         this.ServerHost = host;
         this.ServerPort = Integer.parseInt(port);
@@ -39,7 +38,6 @@ public class UDPClient {
             }
             Console console = System.console();
 
-
             if (console == null) {
                 System.out.println("No console available");
                 return;
@@ -59,13 +57,19 @@ public class UDPClient {
                 socket.send(packet);
             }
 
-
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
-
-
+    }
+    public static void main(String[] args) throws IOException {
+        UDPClient client;
+        if (args.length > 0) {
+            client = new UDPClient(args[0],args[1]);
+        } else {
+            client = new UDPClient();
+        }
+        client.launch();
     }
 
 }
