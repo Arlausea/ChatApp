@@ -5,7 +5,8 @@ Develop a Client-Server Chat application, in UDP and TCP
 
 Usage:
 
-Comment on utilise ?
+Comment on utilise ? java ....
+Schéma diag
 Quels sont les commandes ?
 Les erreurs/exceptions ?
 
