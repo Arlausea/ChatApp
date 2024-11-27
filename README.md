@@ -2,6 +2,44 @@
 Develop a Client-Server Chat application, in UDP and TCP
 
 
+# Features of the code:
+### UDP Communication:
+
+- Connectionless, lightweight communication using datagrams.
+
+- Server logs messages received from clients with their respective IP addresses.
+
+- Client sends UTF-8 encoded messages to the server.
+
+### TCP Communication:
+
+- Reliable, connection-oriented communication between a client and server.
+
+- Server echoes each received message prefixed by the client's IP address.
+
+- Client can continuously send and receive messages until it exits.
+
+### Multiserver UDP:
+
+- We send a packet that will be forwarded directly to the other customers
+
+### Multiserver TCP:
+
+- 
+
+- 
+
+# What is UDP and TCP?
+
+## UDP:
+
+UDP stands for User Datagram Protocol and is a connectionless communication protocol. The User Datagram Protocol, abbreviated UDP, is a protocol for the connectionless transmission of datagrams in IP-based networks. To reach the desired services on the destination hosts, the protocol uses ports, which are an essential part of the UDP header. Like many other network protocols, UDP is part of the Internet Protocol suite. It operates at the transport layer, acting as an intermediary between the network layer and the application layer. By using the User Datagram Protocol, an application can send information very quickly because no connection to the recipient is established and no response is expected. On the other hand, there is no guarantee that packets will arrive in their entirety and in the same order as they were sent. Furthermore, the protocol does not offer any protection against manipulation or access by third parties.
+
+### UDP Properties
+
+1) *UDP is connectionless*: UDP transport is characterised by the fact that there is no connection between the sender and the recipient. The packets in question are then sent to the preferred IP address, which specifies the destination port, without the computer to which this address is assigned having to send a response. If packets are to be returned to the sender, the UDP header may also contain the source port.
+2) 
+
 
 Usage:
 
