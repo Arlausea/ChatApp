@@ -2,6 +2,14 @@
 Develop a Client-Server Chat application, in UDP and TCP
 
 
+
+Usage:
+
+Comment on utilise ?
+Quels sont les commandes ?
+Les erreurs/exceptions ?
+
+
 TODO:
 
 - Test codes
