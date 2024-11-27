@@ -11,21 +11,18 @@ Develop a Client-Server Chat application, in UDP and TCP
 
 ### TCP Communication:
 
-- Reliable, connection-oriented communication between a client and server.
-
-- Server echoes each received message prefixed by the client's IP address.
-
-- Client can continuously send and receive messages until it exits.
+* Reliable, connection-oriented communication between a client and server.
+* Server echoes each received message prefixed by the client's IP address.
+* Client can continuously send and receive messages until it exits.
 
 ### Multiserver UDP:
 
-- We send a packet that will be forwarded directly to the other customers
+* We send a packet that will be forwarded directly to the other customers
 
 ### Multiserver TCP:
 
-- 
-
-- 
+*
+*
 
 # What is UDP and TCP?
 
@@ -36,8 +33,13 @@ UDP stands for User Datagram Protocol and is a connectionless communication prot
 ### UDP Properties
 
 1) *UDP is connectionless*: UDP transport is characterised by the fact that there is no connection between the sender and the recipient. The packets in question are then sent to the preferred IP address, which specifies the destination port, without the computer to which this address is assigned having to send a response. If packets are to be returned to the sender, the UDP header may also contain the source port.
-2) 
+2) *Ports used by UDP*: Like TCP, UDP uses ports to route packets to the correct downstream protocols or applications on the destination system.
+3) *UDP allows fast communication without delay*: this transport protocol is suitable for fast data transmission because it does not establish a connection. The loss of individual packets only affects the quality of the transmission.
+4) *UDP does not guarantee the security or authenticity of data*: by dispensing with mutual authentication of the sender and receiver, the UDP protocol ensures exceptional transmission speed. However, the protocol cannot guarantee the integrity and security of data packets. 
 
+## TCP
+
+### TCP Properties
 
 Usage:
 
