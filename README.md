@@ -39,7 +39,18 @@ UDP stands for User Datagram Protocol and is a connectionless communication prot
 
 ## TCP
 
+TCP stands for Transmission Control Protocol and is a connection-oriented communication protocol. TCP ensures reliable data transmission between devices in IP-based networks. Unlike connectionless protocols such as UDP, TCP establishes a connection between the sender and recipient using a three-way handshake before any data is exchanged. This process ensures that both devices are synchronized and ready for communication.
+
+To facilitate communication, TCP uses ports, which are integral to its header structure, to route data to specific services or applications on the destination host. As a core protocol of the Internet Protocol suite, TCP operates at the transport layer, bridging the gap between the network layer and the application layer.
+
+TCP guarantees that all packets sent will be delivered, in the correct order, and without errors. If packets are lost or corrupted during transmission, TCP detects the issue and retransmits the affected packets. These features make it highly reliable and suitable for applications like web browsing, email, and file transfers. Additionally, TCP incorporates checksums and mutual acknowledgment between sender and receiver to ensure data integrity and protection against unauthorized access, enhancing the security and reliability of the communication process.
+
 ### TCP Properties
+1) *TCP is connection-oriented*: TCP requires a connection to be established between the sender and recipient before data transmission begins. This involves a three-way handshake (SYN, SYN-ACK, ACK) to ensure that both devices are ready for communication. Once the connection is established, data packets are exchanged reliably.
+2) *Ports used by TCP*: TCP uses ports to direct data packets to the appropriate application or service on the destination system. These ports allow the operating system to differentiate between multiple simultaneous connections.
+3) *TCP ensures reliable communication*: TCP provides mechanisms to guarantee the delivery of data packets. It ensures that packets are received in order and retransmits any packets that are lost or corrupted. This makes TCP suitable for applications requiring high accuracy, such as file transfers or web browsing.
+4) *TCP guarantees data integrity and security*: TCP verifies the integrity of transmitted data using checksums and ensures that data packets arrive unaltered. Additionally, the connection-oriented nature of TCP enables mutual authentication of the sender and receiver, enhancing the security of the communication.
+
 
 Usage:
 
