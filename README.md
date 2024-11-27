@@ -5,11 +5,9 @@ Develop a Client-Server Chat application, in UDP and TCP
 # Features of the code:
 ### UDP Communication:
 
-- Connectionless, lightweight communication using datagrams.
-
-- Server logs messages received from clients with their respective IP addresses.
-
-- Client sends UTF-8 encoded messages to the server.
+* Connectionless, lightweight communication using datagrams.
+* Server logs messages received from clients with their respective IP addresses.
+* Client sends UTF-8 encoded messages to the server.
 
 ### TCP Communication:
 
