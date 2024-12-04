@@ -85,7 +85,11 @@ public class UDPServer {
         }
 
 
-
+    /**
+     * Returns the current state of the socket.
+     *
+     * @return String representation of the socket
+     */
     @Override
     public String toString() {
         if (socket == null) {
@@ -106,8 +110,8 @@ public class UDPServer {
      * Accepts optional argument to specify the server port. If no arguments are provided, it
      * uses default values according to the default constructor.
      * </p>
-     * @param args optional arguments: [port]
-     * @throws IOException if an error occurs while running the client
+     * @param args optional argument: [port]
+     * @throws IOException if an error occurs while running the server
      */
     public static void main(String[] args) throws IOException {
         UDPServer server;
