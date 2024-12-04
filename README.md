@@ -71,6 +71,7 @@ javac *.java
 
 # Usage 
 
+Requirement : JDK version 23
 ## UDP 
 
 ### Start the Server:
