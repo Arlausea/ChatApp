@@ -102,16 +102,3 @@ java TCP.TCPClient <host> <port>
 
 ```
 
-Usage:
-
-Comment on utilise ? java ....
-Schéma diag
-Quels sont les commandes ?
-
-
-TODO:
-
-- Test codes
-- Dernière question?
-- Javadoc
-- ReadMe
