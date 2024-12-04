@@ -49,13 +49,62 @@ TCP guarantees that all packets sent will be delivered, in the correct order, an
 
 # How to Start
 
+## Prerequisities
+* Java Development Kit (JDK) 8 or later.
+* Command-line terminal or IDE (e.g., IntelliJ IDEA, Eclipse).
+
+## Installation
+
+1) Clone the repository:
+```shell
+git clone https://github.com/Arlausea/ChatApp.git
+cd ChatApp
+
+```
+2) Compile the Java files:
+
+```shell
+javac *.java
+
+```
+
+# Usage 
+
+## UDP 
+
+### Start the Server:
+
+``` shell
+java UDP.UDPServer <port>
+
+```
+### Start the Client
+
+``` shell
+java UDP.UDPClient <host> <port>
+
+```
+
+## TCP
+
+### TCP Server
+
+```shell
+java TCP.TCPServer <port>
+
+```
+
+### TCP Client
+```shell
+java TCP.TCPClient <host> <port>
+
+```
 
 Usage:
 
 Comment on utilise ? java ....
 Schéma diag
 Quels sont les commandes ?
-Les erreurs/exceptions ?
 
 
 TODO:
