@@ -3,7 +3,7 @@
 This project implements a chat application using both UDP (User Datagram Protocol) and TCP (Transmission Control Protocol) to demonstrate two core Internet communication methods. It includes a simple server-client architecture for both protocols, allowing messages to be sent and received in different networking scenarios. The implementation covers single and multi-client capabilities, making it suitable for understanding both protocols and their use cases in Java.
 
 
-# Features of the code:
+# Features of the code
 ### UDP Communication:
 
 * Connectionless, lightweight communication using datagrams.
