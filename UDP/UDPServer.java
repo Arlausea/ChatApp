@@ -6,6 +6,13 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.nio.charset.StandardCharsets;
 
+
+
+/**
+ * A UDP Server implementation for receiving messages from UDP Client.
+ * The server waits for messages then writes them in the console.
+ * @see UDPClient
+ */
 public class UDPServer {
 
     private int port;
@@ -15,8 +22,11 @@ public class UDPServer {
 
 
     /**
-     * Constructor with one parameter to choose our listening port for the UDP Server.
-     * @param listeningPort
+     * Constructs a UDPServer with the specified number port.
+     *<p>
+     * If the specified port requires sudoers permission, it chooses instead the default port 8080.
+     *</p>
+     * @param listeningPort the port of the server.
      */
     public UDPServer(String listeningPort) {
         this.port = Integer.parseInt(listeningPort);
@@ -27,13 +37,22 @@ public class UDPServer {
     }
 
     /**
-     * Default constructor of the UDP Server with a default port equal to 8080.
+     * Constructs a UDPServer with a defined hostname (localhost) and a defined number port (8080).
      */
     public UDPServer() {
         this.port = defaultPort; // Default port number
         System.out.println("The server will be opened with the default port number 8080. Normal usage: java Main [Listening Port].");
     }
 
+
+    /**
+     * The main method of UDPServer.
+     * <p>
+     * Opens a socket and waits for messages. After receiving a message, writes it in the console.
+     * </p>
+     *
+     * @throws IOException if an error occurs while sending messages.
+     */
     public void launch() throws IOException {
 
         try {
@@ -61,9 +80,11 @@ public class UDPServer {
             dataReceived = packet.getData();
             String dataReceivedToString = new String(dataReceived, StandardCharsets.UTF_8);
             System.out.println("[" + sourceAddress.toString() + "] " + dataReceivedToString); // Format asked
+
+            }
         }
 
-    }
+
 
     @Override
     public String toString() {
@@ -78,6 +99,16 @@ public class UDPServer {
 
     }
 
+
+    /**
+     * The main entry point for the UDPServer application.
+     * <p>
+     * Accepts optional argument to specify the server port. If no arguments are provided, it
+     * uses default values according to the default constructor.
+     * </p>
+     * @param args optional arguments: [port]
+     * @throws IOException if an error occurs while running the client
+     */
     public static void main(String[] args) throws IOException {
         UDPServer server;
         if (args.length > 0) {
