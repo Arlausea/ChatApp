@@ -1,5 +1,6 @@
-# ChatApp
-Develop a Client-Server Chat application, in UDP and TCP
+# ChatApp 
+#### Petit Alexandre and Laumy Arthur
+This project implements a chat application using both UDP (User Datagram Protocol) and TCP (Transmission Control Protocol) to demonstrate two core Internet communication methods. It includes a simple server-client architecture for both protocols, allowing messages to be sent and received in different networking scenarios. The implementation covers single and multi-client capabilities, making it suitable for understanding both protocols and their use cases in Java.
 
 
 # Features of the code:
@@ -70,6 +71,7 @@ javac *.java
 
 # Usage 
 
+Requirement : JDK version 23
 ## UDP 
 
 ### Start the Server:
@@ -100,16 +102,3 @@ java TCP.TCPClient <host> <port>
 
 ```
 
-Usage:
-
-Comment on utilise ? java ....
-Schéma diag
-Quels sont les commandes ?
-
-
-TODO:
-
-- Test codes
-- Dernière question?
-- Javadoc
-- ReadMe
