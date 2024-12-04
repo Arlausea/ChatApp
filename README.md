@@ -15,14 +15,10 @@ Develop a Client-Server Chat application, in UDP and TCP
 * Server echoes each received message prefixed by the client's IP address.
 * Client can continuously send and receive messages until it exits.
 
-### Multiserver UDP:
-
-* We send a packet that will be forwarded directly to the other customers
-
 ### Multiserver TCP:
 
-*
-*
+* Allows multiple clients to connect and communicate simultaneously.
+* Each client interaction is handled by a separate thread to maintain responsiveness.
 
 # What is UDP and TCP?
 
@@ -51,6 +47,8 @@ TCP guarantees that all packets sent will be delivered, in the correct order, an
 3) *TCP ensures reliable communication*: TCP provides mechanisms to guarantee the delivery of data packets. It ensures that packets are received in order and retransmits any packets that are lost or corrupted. This makes TCP suitable for applications requiring high accuracy, such as file transfers or web browsing.
 4) *TCP guarantees data integrity and security*: TCP verifies the integrity of transmitted data using checksums and ensures that data packets arrive unaltered. Additionally, the connection-oriented nature of TCP enables mutual authentication of the sender and receiver, enhancing the security of the communication.
 
+# How to Start
+
 
 Usage:
 
@@ -63,8 +61,6 @@ Les erreurs/exceptions ?
 TODO:
 
 - Test codes
-- MTU taille
-- Dernière question
-- Java Doc
-- ReadMe usage ?
-- Git potabke
+- Dernière question?
+- Javadoc
+- ReadMe
