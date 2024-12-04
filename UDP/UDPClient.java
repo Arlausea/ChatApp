@@ -7,19 +7,16 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.nio.charset.StandardCharsets;
 
-
-
 /**
  * A UDP Client implementation for sending messages to a UDP Server.
  * The client reads messages from the console, sends them to a UDP server,
- * and closes the connection when the user types "exit".
+ * and closes the connection when the user types "exit" or CTRL+D.
  * @see UDPServer
  */
 public class UDPClient {
 
     private final int ServerPort;
     private final String ServerHost;
-
 
     /**
      * Constructs a UDPClient with the specified server hostname and port.
@@ -47,7 +44,7 @@ public class UDPClient {
      * <p>
      * Opens a socket and sends messages
      * to the UDP Server. If no input is provided, the client sends nothing.
-     * If the input is "exit", stops the connection and closes the socket.
+     * If the input is "exit" or CTRL+D, stops the connection and closes the socket.
      * </p>
      *
      * @throws IOException if an error occurs while sending messages.
@@ -73,14 +70,17 @@ public class UDPClient {
 
             while(!(socket.isClosed())){
                 String messageInput = console.readLine("Input: ");
-                if (messageInput.equals("exit")) {
+                if ("exit".equalsIgnoreCase(messageInput) | messageInput == null ) {
                     socket.close();
                     break;
                 }
-                byte[] data = messageInput.getBytes(StandardCharsets.UTF_8); //format needed: UTF-8
-                InetAddress address = InetAddress.getByName(ServerHost);
-                DatagramPacket packet = new DatagramPacket(data, data.length, address, ServerPort);
-                socket.send(packet);
+                if (!"".equalsIgnoreCase(messageInput)) {
+                    byte[] data = messageInput.getBytes(StandardCharsets.UTF_8); //format needed: UTF-8
+                    InetAddress address = InetAddress.getByName(ServerHost);
+                    DatagramPacket packet = new DatagramPacket(data, data.length, address, ServerPort);
+                    socket.send(packet);
+                }
+
             }
 
         } catch (IOException e) {

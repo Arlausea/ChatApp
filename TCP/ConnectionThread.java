@@ -7,8 +7,8 @@ import java.util.List;
 
 public class ConnectionThread extends Thread {
 
-    private Socket socket;
-    private List<Socket> clients = new ArrayList<>();
+    private final Socket socket;
+//    private List<Socket> clients = new ArrayList<>();
 
     public ConnectionThread(Socket clientSocket) {
         this.socket = clientSocket;
@@ -33,7 +33,6 @@ public class ConnectionThread extends Thread {
                 System.out.println("Received message from client: " + clientMessage);
 
                 // Answer to one thread
-
                 out.println("Echo : " + clientMessage);
 
 
@@ -56,6 +55,5 @@ public class ConnectionThread extends Thread {
 
     public static void main(String[] args) {
         ConnectionThread Thread;
-
     }
 }

@@ -86,7 +86,7 @@ public class UDPServer {
 
 
     /**
-     * Returns the current state of the socket.
+     * Returns the current state of the socket for the UDP Server.
      *
      * @return String representation of the socket
      */
