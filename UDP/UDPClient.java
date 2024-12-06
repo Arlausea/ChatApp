@@ -1,6 +1,5 @@
 package UDP;
 
-import javax.swing.text.html.MinimalHTMLWriter;
 import java.io.Console;
 import java.io.IOException;
 import java.net.DatagramPacket;
@@ -16,8 +15,8 @@ import java.nio.charset.StandardCharsets;
  */
 public class UDPClient {
 
-    final int ServerPort;
-    final String ServerHost;
+    private final int ServerPort;
+    private final String ServerHost;
 
     /**
      * Constructs a UDPClient with the specified server hostname and port.
@@ -45,7 +44,7 @@ public class UDPClient {
      * @return the initialized DatagramSocket
      * @throws IOException if an error occurs during socket initialization
      */
-    DatagramSocket initializeSocket() throws IOException {
+    private DatagramSocket initializeSocket() throws IOException {
         DatagramSocket socket = new DatagramSocket();
         if (socket.getInetAddress() == null) {
             System.out.println("Socket opened at all addresses with Port: " + socket.getLocalPort());
