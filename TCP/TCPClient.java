@@ -1,8 +1,5 @@
 package TCP;
 
-import UDP.UDPClient;
-import UDP.UDPServer;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -45,6 +42,36 @@ public class TCPClient {
     }
 
     /**
+     * Handles the communication with the server.
+     *
+     * @param consoleInput the BufferedReader for reading user input
+     * @param in the BufferedReader for reading server responses
+     * @param out the PrintWriter for sending messages to the server
+     * @throws IOException if an I/O error occurs
+     */
+    private void handleCommunication(BufferedReader consoleInput, BufferedReader in, PrintWriter out) throws IOException {
+        String message;
+        System.out.println("Tap a message to chat. Tap exit or CTRL+D to quit.");
+        while (true) {
+            System.out.print("[YOU]: ");
+            message = consoleInput.readLine();
+            if ("exit".equalsIgnoreCase(message) | message == null )  {
+                out.println(message);
+                System.out.println("Disconnection...");
+                break;
+            }
+            if (!"".equalsIgnoreCase(message)){
+                out.println(message);
+                String response = in.readLine();
+                System.out.println("[SERVER]: " + response);
+            }
+        }
+    }
+
+
+
+
+    /**
      * The main method of TCPClient.
      * <p>
      * Opens a socket and sends messages
@@ -63,28 +90,9 @@ public class TCPClient {
             PrintWriter out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()), true);
             BufferedReader consoleInput = new BufferedReader(new InputStreamReader(System.in));
 
-            String message;
-            System.out.println("Tap a message to chat. Tap exit or CTRL+D to quit.");
-
-            while (true) {
-                System.out.print("[YOU]: ");
-                message = consoleInput.readLine();
-
-                if ("exit".equalsIgnoreCase(message) | message == null ) {
-                    out.println(message);
-                    System.out.println("Deconnection...");
-                    break;
-                }
-                if (!"".equalsIgnoreCase(message)) {
-
-                    out.println(message);
+            handleCommunication(consoleInput,in,out);
 
 
-                    String response = in.readLine();
-                    System.out.println("[SERVER]: " + response);
-                }
-
-            }
 
         } catch (IOException e) {
             System.out.println("Error connection: " + e.getMessage());

@@ -1,5 +1,6 @@
 package UDP;
 
+import javax.swing.text.html.MinimalHTMLWriter;
 import java.io.Console;
 import java.io.IOException;
 import java.net.DatagramPacket;
@@ -15,8 +16,8 @@ import java.nio.charset.StandardCharsets;
  */
 public class UDPClient {
 
-    private final int ServerPort;
-    private final String ServerHost;
+    final int ServerPort;
+    final String ServerHost;
 
     /**
      * Constructs a UDPClient with the specified server hostname and port.
@@ -38,26 +39,71 @@ public class UDPClient {
         System.out.println("The server will be opened with the default port number 8080 and localhost. Normal usage: java Main [Listening Port].");
     }
 
+    /**
+     * Initializes the DatagramSocket and displays connection details.
+     *
+     * @return the initialized DatagramSocket
+     * @throws IOException if an error occurs during socket initialization
+     */
+    DatagramSocket initializeSocket() throws IOException {
+        DatagramSocket socket = new DatagramSocket();
+        if (socket.getInetAddress() == null) {
+            System.out.println("Socket opened at all addresses with Port: " + socket.getLocalPort());
+        } else {
+            System.out.println("Socket opened at address: " + socket.getInetAddress() + " Port: " + socket.getLocalPort());
+        }
+        return socket;
+    }
+
+    /**
+     * Handles communication with the server.
+     *
+     * @param socket  the DatagramSocket used for communication
+     * @param console the Console for user input
+     * @throws IOException if an error occurs during communication
+     */
+    void communicateWithServer(DatagramSocket socket, Console console) throws IOException {
+        while (!socket.isClosed()) {
+            String messageInput = console.readLine("Input: ");
+            if ("exit".equalsIgnoreCase(messageInput) || messageInput == null) {
+                socket.close();
+                System.out.println("Client has exited.");
+                break;
+            }
+            if (!messageInput.isEmpty()) {
+                sendMessage(socket, messageInput);
+            }
+        }
+    }
+
+    /**
+     * Sends a message to the UDP server.
+     *
+     * @param socket the DatagramSocket to use
+     * @param message the message to send
+     * @throws IOException if an error occurs while sending the message
+     */
+    void sendMessage(DatagramSocket socket, String message) throws IOException {
+        byte[] data = message.getBytes(StandardCharsets.UTF_8);
+        InetAddress address = InetAddress.getByName(this.ServerHost);
+        DatagramPacket packet = new DatagramPacket(data, data.length, address, this.ServerPort);
+        socket.send(packet);
+    }
+
+
 
     /**
      * The main method of UDPClient.
      * <p>
-     * Opens a socket and sends messages
-     * to the UDP Server. If no input is provided, the client sends nothing.
+     * Opens a socket and sends messages to the UDP Server. If no input is provided, the client sends nothing.
      * If the input is "exit" or CTRL+D, stops the connection and closes the socket.
      * </p>
      *
      * @throws IOException if an error occurs while sending messages.
      */
     public void launch() throws IOException {
-        try {
-            DatagramSocket socket = new DatagramSocket();
-            if (socket.getInetAddress() == null){
-                System.out.println("Socket opened at all addresses with Port: " + socket.getLocalPort());
-            }
-            else{
-                System.out.println("Socket opened at address: "+ socket.getInetAddress() + " Port: " + socket.getLocalPort());
-            }
+
+            DatagramSocket socket = initializeSocket();
             Console console = System.console();
 
             if (console == null) {
@@ -65,28 +111,7 @@ public class UDPClient {
                 return;
             }
             System.out.println("Client started. Please type messages to send to the UDP Server. Tap exit to quit");
-
-            // Creation of a DatagramPacket
-
-            while(!(socket.isClosed())){
-                String messageInput = console.readLine("Input: ");
-                if ("exit".equalsIgnoreCase(messageInput) | messageInput == null ) {
-                    socket.close();
-                    break;
-                }
-                if (!"".equalsIgnoreCase(messageInput)) {
-                    byte[] data = messageInput.getBytes(StandardCharsets.UTF_8); //format needed: UTF-8
-                    InetAddress address = InetAddress.getByName(ServerHost);
-                    DatagramPacket packet = new DatagramPacket(data, data.length, address, ServerPort);
-                    socket.send(packet);
-                }
-
-            }
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
+            communicateWithServer(socket, console);
     }
 
     /**

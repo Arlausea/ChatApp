@@ -44,6 +44,55 @@ public class UDPServer {
         System.out.println("The server will be opened with the default port number 8080. Normal usage: java Main [Listening Port].");
     }
 
+    /**
+     * Initializes the server socket and displays connection details.
+     *
+     * @throws IOException if an error occurs during socket initialization.
+     */
+    private void initializationSocket() throws IOException {
+        try{
+            socket = new DatagramSocket(this.port);
+            if (socket.getInetAddress() == null) {
+                System.out.println("Socket opened at all addresses with Port: " + socket.getLocalPort());
+            } else {
+                System.out.println("Socket opened at address: " + socket.getInetAddress() + " Port: " + socket.getLocalPort());
+            }
+        }
+        catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Receives packets from clients and processes them.
+     *
+     * @throws IOException if an error occurs while receiving packets
+     */
+    private void receivePackets() throws IOException {
+        while (!socket.isClosed()) {
+            byte[] dataReceived = new byte[maxSize];
+            DatagramPacket packet = new DatagramPacket(dataReceived, dataReceived.length);
+
+            System.out.println("Waiting to receive packets.");
+            socket.receive(packet);
+            System.out.println("Packet received.");
+
+            processPacket(packet);
+        }
+    }
+
+    /**
+     * Processes a received packet by extracting its data and source address.
+     *
+     * @param packet the received DatagramPacket
+     */
+    private void processPacket(DatagramPacket packet) {
+        InetAddress sourceAddress = packet.getAddress();
+        String message = new String(packet.getData(), 0, packet.getLength(), StandardCharsets.UTF_8);
+
+        System.out.println("[" + sourceAddress + "] " + message); // Format asked
+    }
+
 
     /**
      * The main method of UDPServer.
@@ -55,33 +104,9 @@ public class UDPServer {
      */
     public void launch() throws IOException {
 
-        try {
-            socket = new DatagramSocket(this.port);
-            if (socket.getInetAddress() == null) {
-                System.out.println("Socket opened at all addresses with Port: " + socket.getLocalPort());
-            } else {
-                System.out.println("Socket opened at address: " + socket.getInetAddress() + " Port: " + socket.getLocalPort());
-            }
+        initializationSocket();
+        receivePackets();
 
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        // Creation of a DatagramPacket
-
-        while (!(socket.isClosed())) {
-            byte[] dataReceived = new byte[maxSize];
-            DatagramPacket packet = new DatagramPacket(dataReceived, dataReceived.length);
-            System.out.println("Waiting to receive packets.");
-            socket.receive(packet);
-            System.out.println("Packet received");
-
-            InetAddress sourceAddress = packet.getAddress();
-            dataReceived = packet.getData();
-            String dataReceivedToString = new String(dataReceived, StandardCharsets.UTF_8);
-            System.out.println("[" + sourceAddress.toString() + "] " + dataReceivedToString); // Format asked
-
-            }
         }
 
 

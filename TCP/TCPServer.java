@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -50,6 +51,55 @@ public class TCPServer {
     }
 
     /**
+     * Listens for incoming client connections and handles their communication.
+     *
+     * @throws IOException if an error occurs during communication
+     */
+    private void listensForConnections() throws IOException {
+        Socket clientSocket = null;
+        while (true) {
+            if (clientSocket == null || clientSocket.isClosed()) {
+                System.out.println("Waiting for a connection...");
+                clientSocket = serverSocket.accept();
+            }
+            System.out.println("Client connected from: " + clientSocket.getInetAddress());
+            System.out.println("Waiting for a message...");
+
+            handleClientCommunications(clientSocket);
+
+        }
+    }
+    /**
+     * Handles communication with a connected client.
+     *
+     * @param clientSocket the connected client socket
+     * @throws IOException if an error occurs during communication
+     */
+    private void handleClientCommunications(Socket clientSocket) throws IOException {
+
+
+        // In and Out streams
+        BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+        PrintWriter out = new PrintWriter(new OutputStreamWriter(clientSocket.getOutputStream()), true);
+
+        // Reading of data's client
+        String clientMessage = in.readLine();
+        System.out.println("Received message from client: " + clientMessage);
+
+        // Answer
+        out.println("Echo : " + clientMessage);
+
+        // Closing of the connection
+        if (clientMessage != null) {
+            if (clientMessage.equalsIgnoreCase("exit") | clientMessage.equals("null")) {
+                clientSocket.close();
+                System.out.println("End of connection.");
+                //clientSocket = null;
+            }
+        }
+    }
+
+    /**
      * The main method of TCPServer.
      * <p>
      * Opens a socket and waits for a connection. When a client start a connection,
@@ -66,36 +116,8 @@ public class TCPServer {
             System.out.println("TCP server launched at port " + this.port);
 
             // Waiting loop for connections
-            Socket clientSocket = null;
+            listensForConnections();
 
-            while (true) {
-                if (clientSocket == null) {
-                    System.out.println("Waiting for a connection...");
-                    clientSocket = serverSocket.accept();
-                }
-                System.out.println("Waiting for a message...");
-                System.out.println("Client connected from: " + clientSocket.getInetAddress());
-
-                // In and Out streams
-                BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-                PrintWriter out = new PrintWriter(new OutputStreamWriter(clientSocket.getOutputStream()), true);
-
-                // Reading of data's client
-                String clientMessage = in.readLine();
-                System.out.println("Received message from client: " + clientMessage);
-
-                // Answer
-                out.println("Echo : " + clientMessage);
-
-                // Closing of the connection
-                if (clientMessage != null) {
-                    if (clientMessage.equalsIgnoreCase("exit") | clientMessage.equals("null")) {
-                        clientSocket.close();
-                        System.out.println("End of connection.");
-                        clientSocket = null;
-                    }
-                }
-            }
 
         } catch (IOException e) {
             throw new RuntimeException(e);

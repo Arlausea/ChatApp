@@ -12,6 +12,7 @@ import java.net.Socket;
  * the message to the original client. the message is not send to other clients.
  * </p>
  * @see TCPServer
+ * @see ConnectionThread For more info on threads
  */
 public class TCPMultipleServer {
 
